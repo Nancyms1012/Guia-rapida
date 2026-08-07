@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Rapida UV-5R BAOFENG</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f1923;
+            color: #e8e8e8;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
+            border-radius: 20px;
+            border: 1px solid #2a4a6a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(34, 139, 230, 0.05) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4dabf7, #74c0fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            color: #8ba4b8;
+            font-weight: 400;
+            position: relative;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 16px;
+            background: rgba(34, 139, 230, 0.15);
+            border: 1px solid rgba(34, 139, 230, 0.3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #74c0fc;
+            font-weight: 600;
+            position: relative;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .step {
+            background: linear-gradient(135deg, #1a2a3a 0%, #152535 100%);
+            border-radius: 16px;
+            padding: 28px 30px;
+            border: 1px solid #2a3a4a;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step:hover {
+            border-color: #3a5a7a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #228be6, #1971c2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(34, 139, 230, 0.3);
+        }
+
+        .step-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #e8f0f8;
+        }
+
+        .step-content {
+            padding-left: 60px;
+            color: #b8c8d8;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .step-icon {
+            font-size: 1.5rem;
+            margin-right: 4px;
+        }
+
+        /* Warning box */
+        .warning {
+            background: linear-gradient(135deg, #2a2010 0%, #1a1508 100%);
+            border: 1px solid #5a4a20;
+            border-left: 4px solid #fab005;
+        }
+
+        .warning .step-number {
+            background: linear-gradient(135deg, #fab005, #e8a000);
+            box-shadow: 0 4px 12px rgba(250, 176, 5, 0.3);
+        }
+
+        .warning .step-title {
+            color: #ffd43b;
+        }
+
+        /* Important box */
+        .important {
+            background: linear-gradient(135deg, #2a1520 0%, #1a0d15 100%);
+            border: 1px solid #5a2040;
+            border-left: 4px solid #f06595;
+        }
+
+        .important .step-number {
+            background: linear-gradient(135deg, #f06595, #d6336c);
+            box-shadow: 0 4px 12px rgba(240, 101, 149, 0.3);
+        }
+
+        .important .step-title {
+            color: #ffa8c5;
+        }
+
+        /* Info callout */
+        .callout {
+            background: rgba(34, 139, 230, 0.08);
+            border: 1px solid rgba(34, 139, 230, 0.2);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-top: 12px;
+            font-size: 0.88rem;
+            color: #8cc4f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .callout-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* PTT Section */
+        .ptt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .ptt-card {
+            background: rgba(34, 139, 230, 0.08);
+            border: 1px solid rgba(34, 139, 230, 0.2);
+            border-radius: 12px;
+            padding: 18px 14px;
+            text-align: center;
+        }
+
+        .ptt-card .ptt-label {
+            font-weight: 700;
+            color: #74c0fc;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .ptt-card .ptt-desc {
+            font-size: 0.82rem;
+            color: #8ba8c8;
+            line-height: 1.4;
+        }
+
+        .ptt-card.secondary {
+            background: rgba(130, 90, 230, 0.08);
+            border-color: rgba(130, 90, 230, 0.2);
+        }
+
+        .ptt-card.secondary .ptt-label {
+            color: #b197fc;
+        }
+
+        .ptt-card.flashlight {
+            background: rgba(250, 176, 5, 0.08);
+            border-color: rgba(250, 176, 5, 0.2);
+        }
+
+        .ptt-card.flashlight .ptt-label {
+            color: #ffd43b;
+        }
+
+        /* Footer info */
+        .footer-section {
+            margin-top: 30px;
+            background: linear-gradient(135deg, #1a2a3a 0%, #152535 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #2a4a6a;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            color: #74c0fc;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px dashed #3a4a5a;
+        }
+
+        .info-item label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6a8a9a;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-item .value {
+            font-size: 1.1rem;
+            color: #e8f0f8;
+            font-weight: 700;
+            min-height: 28px;
+            border-bottom: 2px solid #3a5a7a;
+            padding-bottom: 4px;
+        }
+
+        /* Lock indicator */
+        .lock-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(240, 101, 149, 0.1);
+            border: 1px solid rgba(240, 101, 149, 0.3);
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            color: #ffa8c5;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .ptt-grid, .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .step-content {
+                padding-left: 0;
+                margin-top: 10px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: #1a1a1a;
+                padding: 20px;
+            }
+            .header {
+                background: #f0f4f8;
+                border-color: #d0d8e0;
+            }
+            .header h1 {
+                -webkit-text-fill-color: #1971c2;
+                color: #1971c2;
+            }
+            .step {
+                background: #f8fafb;
+                border-color: #e0e8f0;
+                break-inside: avoid;
+            }
+            .step-content, .callout, .ptt-card .ptt-desc {
+                color: #3a3a3a;
+            }
+            .warning {
+                background: #fff8e0;
+                border-color: #e8c800;
+            }
+            .important {
+                background: #ffe8f0;
+                border-color: #d63384;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Guia Rapida UV-5R</h1>
+            <p class="subtitle">BAOFENG - Equipo de Comunicaciones</p>
+            <span class="badge">REFERENCIA RAPIDA</span>
+        </div>
+
+        <!-- Steps -->
+        <div class="steps">
+
+            <!-- Step 1: Antena -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title"><span class="step-icon">📡</span> Antena</div>
+                </div>
+                <div class="step-content">
+                    Mantener la antena <strong>puesta y sin obstruccion</strong> en todo momento para garantizar una comunicacion clara.
+                </div>
+            </div>
+
+            <!-- Step 2: Bloqueo de teclado -->
+            <div class="step warning">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title"><span class="step-icon">🔒</span> Bloqueo de Teclado</div>
+                </div>
+                <div class="step-content">
+                    Mantener presionado el boton de bloqueo hasta que aparezca el simbolo de candado en la esquina derecha de la pantalla.
+                    <div class="lock-badge">
+                        🔑 Con el bloqueo activado, el teclado no funcionara
+                    </div>
+                    <div class="callout">
+                        <span class="callout-icon">ℹ️</span>
+                        <span>Mantener asi hasta que el encargado indique y explique el cambio que sea necesario.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Encendido y volumen -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-title"><span class="step-icon">🔊</span> Encendido y Volumen</div>
+                </div>
+                <div class="step-content">
+                    Gire el control de volumen <strong>hacia la derecha</strong> para encender la radio y ajustar el volumen al nivel necesario.
+                </div>
+            </div>
+
+            <!-- Step 4: Botones PTT -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-title"><span class="step-icon">🎙️</span> Botones Laterales (PTT)</div>
+                </div>
+                <div class="step-content">
+                    En el lado izquierdo encontrara 3 botones:
+                    <div class="ptt-grid">
+                        <div class="ptt-card">
+                            <div class="ptt-label">PTT-A</div>
+                            <div class="ptt-desc">Canal Principal<br><strong>Mantener para transmitir</strong></div>
+                        </div>
+                        <div class="ptt-card secondary">
+                            <div class="ptt-label">PTT-B</div>
+                            <div class="ptt-desc">Canal Secundario<br><em>Solo si el encargado lo indica</em></div>
+                        </div>
+                        <div class="ptt-card flashlight">
+                            <div class="ptt-label">Linterna</div>
+                            <div class="ptt-desc">Boton pequeno con dos rayas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: Limite de transmision -->
+            <div class="step important">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <div class="step-title"><span class="step-icon">⏱️</span> Limite de Transmision</div>
+                </div>
+                <div class="step-content">
+                    Si mantiene uno de los PTT por mas de <strong>60 segundos</strong>, su transmision sera cortada automaticamente.
+                    <div class="callout">
+                        <span class="callout-icon">⚠️</span>
+                        <span>Espere <strong>1-2 segundos</strong> despues de presionar el PTT antes de hablar, o el inicio de su transmision podria cortarse.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6: Como hablar -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <div class="step-title"><span class="step-icon">💬</span> Como Hablar</div>
+                </div>
+                <div class="step-content">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;">✅ Hable de forma <strong>clara y breve</strong></li>
+                        <li style="margin-bottom: 10px;">✅ Espere a que la otra persona <strong>termine de transmitir</strong></li>
+                        <li>✅ La radio esta configurada para evitar transmisiones simultaneas</li>
+                    </ul>
+                    <div class="callout">
+                        <span class="callout-icon">ℹ️</span>
+                        <span>La proteccion contra transmisiones simultaneas solo deberia ser desactivada si el coordinador lo indica.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer: Canales y coordinador -->
+        <div class="footer-section">
+            <h3>📋 Informacion de Operacion</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>Canal Principal</label>
+                    <div class="value"></div>
+                </div>
+                <div class="info-item">
+                    <label>Canal Secundario</label>
+                    <div class="value"></div>
+                </div>
+                <div class="info-item">
+                    <label>Coordinador</label>
+                    <div class="value"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
