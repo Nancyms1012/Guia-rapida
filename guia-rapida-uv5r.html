@@ -5,379 +5,317 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia Rapida UV-5R BAOFENG</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0f1923;
-            color: #e8e8e8;
-            min-height: 100vh;
-            padding: 40px 20px;
+        @page {
+            size: landscape;
+            margin: 12mm;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0f1923;
+            color: #e8e8e8;
+            width: 100%;
+            height: 100vh;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .page {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 14px;
         }
 
         /* Header */
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 40px 30px;
+            padding: 12px 20px;
             background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
-            border-radius: 20px;
+            border-radius: 12px;
             border: 1px solid #2a4a6a;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(34, 139, 230, 0.05) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 1; }
         }
 
         .header h1 {
-            font-size: 2.2rem;
+            font-size: 1.4rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #4dabf7, #74c0fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-            position: relative;
+            color: #74c0fc;
+            margin-bottom: 2px;
         }
 
         .header .subtitle {
-            font-size: 1rem;
+            font-size: 0.75rem;
             color: #8ba4b8;
-            font-weight: 400;
-            position: relative;
         }
 
-        .header .badge {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 6px 16px;
-            background: rgba(34, 139, 230, 0.15);
-            border: 1px solid rgba(34, 139, 230, 0.3);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #74c0fc;
-            font-weight: 600;
-            position: relative;
+        /* Main grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
         }
 
-        /* Steps */
-        .steps {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
+        /* Step cards */
         .step {
             background: linear-gradient(135deg, #1a2a3a 0%, #152535 100%);
-            border-radius: 16px;
-            padding: 28px 30px;
+            border-radius: 10px;
+            padding: 14px 16px;
             border: 1px solid #2a3a4a;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .step:hover {
-            border-color: #3a5a7a;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
         }
 
         .step-header {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 14px;
+            gap: 10px;
+            margin-bottom: 8px;
         }
 
         .step-number {
-            width: 44px;
-            height: 44px;
+            width: 28px;
+            height: 28px;
             background: linear-gradient(135deg, #228be6, #1971c2);
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 1.1rem;
+            font-size: 0.8rem;
             color: white;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(34, 139, 230, 0.3);
+        }
+
+        .step-icon {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
         }
 
         .step-title {
-            font-size: 1.15rem;
+            font-size: 0.82rem;
             font-weight: 700;
             color: #e8f0f8;
         }
 
         .step-content {
-            padding-left: 60px;
             color: #b8c8d8;
-            line-height: 1.7;
-            font-size: 0.95rem;
+            line-height: 1.5;
+            font-size: 0.72rem;
+            flex: 1;
         }
 
-        .step-icon {
-            font-size: 1.5rem;
-            margin-right: 4px;
+        .step-content strong {
+            color: #e8f0f8;
         }
 
-        /* Warning box */
+        /* Warning */
         .warning {
             background: linear-gradient(135deg, #2a2010 0%, #1a1508 100%);
             border: 1px solid #5a4a20;
-            border-left: 4px solid #fab005;
+            border-left: 3px solid #fab005;
         }
 
         .warning .step-number {
             background: linear-gradient(135deg, #fab005, #e8a000);
-            box-shadow: 0 4px 12px rgba(250, 176, 5, 0.3);
         }
 
         .warning .step-title {
             color: #ffd43b;
         }
 
-        /* Important box */
+        /* Important */
         .important {
             background: linear-gradient(135deg, #2a1520 0%, #1a0d15 100%);
             border: 1px solid #5a2040;
-            border-left: 4px solid #f06595;
+            border-left: 3px solid #f06595;
         }
 
         .important .step-number {
             background: linear-gradient(135deg, #f06595, #d6336c);
-            box-shadow: 0 4px 12px rgba(240, 101, 149, 0.3);
         }
 
         .important .step-title {
             color: #ffa8c5;
         }
 
-        /* Info callout */
+        /* Callout */
         .callout {
-            background: rgba(34, 139, 230, 0.08);
+            background: rgba(34, 139, 230, 0.1);
             border: 1px solid rgba(34, 139, 230, 0.2);
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin-top: 12px;
-            font-size: 0.88rem;
+            border-radius: 6px;
+            padding: 6px 10px;
+            margin-top: 6px;
+            font-size: 0.68rem;
             color: #8cc4f0;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
         }
 
-        .callout-icon {
-            font-size: 1.1rem;
-            flex-shrink: 0;
-            margin-top: 1px;
+        .callout-warning {
+            background: rgba(250, 176, 5, 0.1);
+            border-color: rgba(250, 176, 5, 0.2);
+            color: #ffd43b;
         }
 
-        /* PTT Section */
+        /* PTT mini cards */
         .ptt-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 14px;
-            margin-top: 16px;
+            gap: 6px;
+            margin-top: 8px;
         }
 
         .ptt-card {
-            background: rgba(34, 139, 230, 0.08);
-            border: 1px solid rgba(34, 139, 230, 0.2);
-            border-radius: 12px;
-            padding: 18px 14px;
+            background: rgba(34, 139, 230, 0.1);
+            border: 1px solid rgba(34, 139, 230, 0.25);
+            border-radius: 6px;
+            padding: 8px 6px;
             text-align: center;
         }
 
         .ptt-card .ptt-label {
             font-weight: 700;
             color: #74c0fc;
-            font-size: 0.9rem;
-            margin-bottom: 6px;
+            font-size: 0.7rem;
+            margin-bottom: 3px;
         }
 
         .ptt-card .ptt-desc {
-            font-size: 0.82rem;
+            font-size: 0.62rem;
             color: #8ba8c8;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .ptt-card.secondary {
-            background: rgba(130, 90, 230, 0.08);
-            border-color: rgba(130, 90, 230, 0.2);
+            background: rgba(130, 90, 230, 0.1);
+            border-color: rgba(130, 90, 230, 0.25);
         }
-
-        .ptt-card.secondary .ptt-label {
-            color: #b197fc;
-        }
+        .ptt-card.secondary .ptt-label { color: #b197fc; }
 
         .ptt-card.flashlight {
-            background: rgba(250, 176, 5, 0.08);
-            border-color: rgba(250, 176, 5, 0.2);
+            background: rgba(250, 176, 5, 0.1);
+            border-color: rgba(250, 176, 5, 0.25);
         }
+        .ptt-card.flashlight .ptt-label { color: #ffd43b; }
 
-        .ptt-card.flashlight .ptt-label {
-            color: #ffd43b;
-        }
-
-        /* Footer info */
+        /* Footer */
         .footer-section {
-            margin-top: 30px;
             background: linear-gradient(135deg, #1a2a3a 0%, #152535 100%);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 10px;
+            padding: 12px 20px;
             border: 1px solid #2a4a6a;
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
 
         .footer-section h3 {
-            font-size: 1.1rem;
+            font-size: 0.8rem;
             color: #74c0fc;
-            margin-bottom: 20px;
+            white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 16px;
+            display: flex;
+            gap: 20px;
+            flex: 1;
         }
 
         .info-item {
+            flex: 1;
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            padding: 18px;
+            border-radius: 8px;
+            padding: 8px 14px;
             border: 1px dashed #3a4a5a;
         }
 
         .info-item label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #6a8a9a;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             font-weight: 600;
         }
 
         .info-item .value {
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             color: #e8f0f8;
             font-weight: 700;
-            min-height: 28px;
+            min-height: 20px;
             border-bottom: 2px solid #3a5a7a;
-            padding-bottom: 4px;
         }
 
-        /* Lock indicator */
-        .lock-badge {
-            display: inline-flex;
-            align-items: center;
+        /* Check list */
+        .check-item {
+            display: flex;
+            align-items: flex-start;
             gap: 6px;
-            background: rgba(240, 101, 149, 0.1);
-            border: 1px solid rgba(240, 101, 149, 0.3);
-            border-radius: 8px;
-            padding: 8px 14px;
-            font-size: 0.85rem;
-            color: #ffa8c5;
-            margin-top: 10px;
+            margin-bottom: 4px;
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            .ptt-grid, .info-grid {
-                grid-template-columns: 1fr;
-            }
-            .header h1 {
-                font-size: 1.6rem;
-            }
-            .step-content {
-                padding-left: 0;
-                margin-top: 10px;
-            }
+        .check-icon {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            margin-top: 1px;
         }
 
-        /* Print styles */
+        /* SVG Icons */
+        .icon-antenna { color: #74c0fc; }
+        .icon-lock { color: #ffd43b; }
+        .icon-volume { color: #74c0fc; }
+        .icon-mic { color: #74c0fc; }
+        .icon-timer { color: #ffa8c5; }
+        .icon-chat { color: #74c0fc; }
+
+        /* Print */
         @media print {
             body {
-                background: white;
-                color: #1a1a1a;
-                padding: 20px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 0;
             }
-            .header {
-                background: #f0f4f8;
-                border-color: #d0d8e0;
-            }
-            .header h1 {
-                -webkit-text-fill-color: #1971c2;
-                color: #1971c2;
-            }
-            .step {
-                background: #f8fafb;
-                border-color: #e0e8f0;
-                break-inside: avoid;
-            }
-            .step-content, .callout, .ptt-card .ptt-desc {
-                color: #3a3a3a;
-            }
-            .warning {
-                background: #fff8e0;
-                border-color: #e8c800;
-            }
-            .important {
-                background: #ffe8f0;
-                border-color: #d63384;
+            .page {
+                height: auto;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="page">
         <!-- Header -->
         <div class="header">
-            <h1>Guia Rapida UV-5R</h1>
-            <p class="subtitle">BAOFENG - Equipo de Comunicaciones</p>
-            <span class="badge">REFERENCIA RAPIDA</span>
+            <h1>GUIA RAPIDA UV-5R BAOFENG</h1>
+            <p class="subtitle">Equipo de Comunicaciones &mdash; Referencia Rapida</p>
         </div>
 
-        <!-- Steps -->
-        <div class="steps">
+        <!-- Main Content Grid -->
+        <div class="main-grid">
 
             <!-- Step 1: Antena -->
             <div class="step">
                 <div class="step-header">
                     <div class="step-number">1</div>
-                    <div class="step-title"><span class="step-icon">📡</span> Antena</div>
+                    <svg class="step-icon icon-antenna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 12 L7 4 L12 12"/>
+                        <path d="M12 12 L17 4 L22 12"/>
+                        <line x1="12" y1="12" x2="12" y2="22"/>
+                    </svg>
+                    <div class="step-title">Antena</div>
                 </div>
                 <div class="step-content">
-                    Mantener la antena <strong>puesta y sin obstruccion</strong> en todo momento para garantizar una comunicacion clara.
+                    Mantener la antena <strong>puesta y sin obstruccion</strong> en todo momento para garantizar una comunicacion clara y efectiva.
                 </div>
             </div>
 
@@ -385,16 +323,16 @@
             <div class="step warning">
                 <div class="step-header">
                     <div class="step-number">2</div>
-                    <div class="step-title"><span class="step-icon">🔒</span> Bloqueo de Teclado</div>
+                    <svg class="step-icon icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <div class="step-title">Bloqueo de Teclado</div>
                 </div>
                 <div class="step-content">
                     Mantener presionado el boton de bloqueo hasta que aparezca el simbolo de candado en la esquina derecha de la pantalla.
-                    <div class="lock-badge">
-                        🔑 Con el bloqueo activado, el teclado no funcionara
-                    </div>
-                    <div class="callout">
-                        <span class="callout-icon">ℹ️</span>
-                        <span>Mantener asi hasta que el encargado indique y explique el cambio que sea necesario.</span>
+                    <div class="callout callout-warning">
+                        <strong>IMPORTANTE:</strong> Con el bloqueo activado el teclado no funcionara. Mantener asi hasta que el encargado indique lo contrario.
                     </div>
                 </div>
             </div>
@@ -403,10 +341,15 @@
             <div class="step">
                 <div class="step-header">
                     <div class="step-number">3</div>
-                    <div class="step-title"><span class="step-icon">🔊</span> Encendido y Volumen</div>
+                    <svg class="step-icon icon-volume" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                    </svg>
+                    <div class="step-title">Encendido y Volumen</div>
                 </div>
                 <div class="step-content">
-                    Gire el control de volumen <strong>hacia la derecha</strong> para encender la radio y ajustar el volumen al nivel necesario.
+                    Gire el control de volumen <strong>hacia la derecha</strong> para encender la radio y ajustar al volumen necesario.
                 </div>
             </div>
 
@@ -414,10 +357,16 @@
             <div class="step">
                 <div class="step-header">
                     <div class="step-number">4</div>
-                    <div class="step-title"><span class="step-icon">🎙️</span> Botones Laterales (PTT)</div>
+                    <svg class="step-icon icon-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="23"/>
+                        <line x1="8" y1="23" x2="16" y2="23"/>
+                    </svg>
+                    <div class="step-title">Botones Laterales (PTT)</div>
                 </div>
                 <div class="step-content">
-                    En el lado izquierdo encontrara 3 botones:
+                    En el lado izquierdo hay 3 botones:
                     <div class="ptt-grid">
                         <div class="ptt-card">
                             <div class="ptt-label">PTT-A</div>
@@ -425,11 +374,11 @@
                         </div>
                         <div class="ptt-card secondary">
                             <div class="ptt-label">PTT-B</div>
-                            <div class="ptt-desc">Canal Secundario<br><em>Solo si el encargado lo indica</em></div>
+                            <div class="ptt-desc">Canal Secundario<br><em>Solo si se indica</em></div>
                         </div>
                         <div class="ptt-card flashlight">
                             <div class="ptt-label">Linterna</div>
-                            <div class="ptt-desc">Boton pequeno con dos rayas</div>
+                            <div class="ptt-desc">Boton pequeno<br>con dos rayas</div>
                         </div>
                     </div>
                 </div>
@@ -439,13 +388,19 @@
             <div class="step important">
                 <div class="step-header">
                     <div class="step-number">5</div>
-                    <div class="step-title"><span class="step-icon">⏱️</span> Limite de Transmision</div>
+                    <svg class="step-icon icon-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="13" r="8"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="13" x2="15" y2="13"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="9" y1="1" x2="15" y2="1"/>
+                    </svg>
+                    <div class="step-title">Limite de Transmision</div>
                 </div>
                 <div class="step-content">
-                    Si mantiene uno de los PTT por mas de <strong>60 segundos</strong>, su transmision sera cortada automaticamente.
+                    Si mantiene el PTT por mas de <strong>60 segundos</strong>, la transmision sera cortada automaticamente.
                     <div class="callout">
-                        <span class="callout-icon">⚠️</span>
-                        <span>Espere <strong>1-2 segundos</strong> despues de presionar el PTT antes de hablar, o el inicio de su transmision podria cortarse.</span>
+                        Espere <strong>1-2 segundos</strong> despues de presionar el PTT antes de hablar para evitar que se corte el inicio.
                     </div>
                 </div>
             </div>
@@ -454,26 +409,35 @@
             <div class="step">
                 <div class="step-header">
                     <div class="step-number">6</div>
-                    <div class="step-title"><span class="step-icon">💬</span> Como Hablar</div>
+                    <svg class="step-icon icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <div class="step-title">Como Hablar</div>
                 </div>
                 <div class="step-content">
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 10px;">✅ Hable de forma <strong>clara y breve</strong></li>
-                        <li style="margin-bottom: 10px;">✅ Espere a que la otra persona <strong>termine de transmitir</strong></li>
-                        <li>✅ La radio esta configurada para evitar transmisiones simultaneas</li>
-                    </ul>
-                    <div class="callout">
-                        <span class="callout-icon">ℹ️</span>
-                        <span>La proteccion contra transmisiones simultaneas solo deberia ser desactivada si el coordinador lo indica.</span>
+                    <div class="check-item">
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="#51cf66" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>Hable de forma <strong>clara y breve</strong></span>
+                    </div>
+                    <div class="check-item">
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="#51cf66" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>Espere a que la otra persona <strong>termine</strong></span>
+                    </div>
+                    <div class="check-item">
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="#51cf66" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>Radio configurada para evitar transmisiones simultaneas</span>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Footer: Canales y coordinador -->
+        <!-- Footer -->
         <div class="footer-section">
-            <h3>📋 Informacion de Operacion</h3>
+            <h3>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                INFO
+            </h3>
             <div class="info-grid">
                 <div class="info-item">
                     <label>Canal Principal</label>
@@ -489,7 +453,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </body>
 </html>
