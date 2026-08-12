@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0c1117">
+    <link rel="manifest" href="data:application/json,{'name':'Radios UV-5R','short_name':'UV-5R','start_url':'.','display':'standalone','background_color':'#0c1117','theme_color':'#0c1117'}">
     <title>Radios UV-5R</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,7 +30,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             background: var(--bg);
             color: var(--text);
-            min-height: 100dvh;
+            height: 100dvh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -92,7 +97,7 @@
         .bottom-nav-item:hover { background: rgba(255,255,255,0.04); }
 
         /* Main content */
-        .main { flex: 1; overflow-y: auto; padding: 20px; }
+        .main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px; padding-bottom: 30px; }
         .tab-panel { display: none; animation: fadeIn 0.3s ease; }
         .tab-panel.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -662,6 +667,27 @@
         }
 
         renderList();
+
+        // PWA - Service Worker inline for offline use
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE = 'radios-uv5r-v1';
+                self.addEventListener('install', e => {
+                    e.waitUntil(caches.open(CACHE).then(c => c.addAll(['/'])).catch(() => {}));
+                    self.skipWaiting();
+                });
+                self.addEventListener('activate', e => { e.waitUntil(self.clients.claim()); });
+                self.addEventListener('fetch', e => {
+                    e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(resp => {
+                        const clone = resp.clone();
+                        caches.open(CACHE).then(c => c.put(e.request, clone));
+                        return resp;
+                    }).catch(() => caches.match('/'))));
+                });
+            `;
+            const blob = new Blob([swCode], { type: 'application/javascript' });
+            navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+        }
     </script>
 </body>
 </html>
